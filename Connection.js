@@ -22,4 +22,15 @@ Connection.connect((error) => {
     }
     console.log("Query results: ", results);
   });
+
+  Connection.query(
+    "INSERT INTO student_details(Student_id, Name, Class) VALUES ('127', 'KAVI', 'CS-I')",
+    (error, result) => {
+      if (error) {
+        console.error("Error while inserting data: ", error);
+        return;
+      }
+      console.log("Data inserted: ", result);
+    }
+  );
 });

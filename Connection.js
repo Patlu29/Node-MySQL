@@ -14,4 +14,12 @@ Connection.connect((error) => {
     return;
   }
   console.log("connection successful..");
+
+  Connection.query("SELECT * FROM student_details", (error, results) => {
+    if (error) {
+      console.error("Error while executing query: ", error);
+      return;
+    }
+    console.log("Query results: ", results);
+  });
 });

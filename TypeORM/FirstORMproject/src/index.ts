@@ -3,15 +3,30 @@ import { Flight } from "./entity/Flight"
 
 AppDataSource.initialize().then(async () => {
 
-    console.log("Inserting a new user into the database...")
-    const flight = new Flight()
-    flight.F_number = 953054
-    flight.F_name = "AirIndia"
-    flight.Destination = "Delhi"
-    flight.IsActive = false
+    const repository = AppDataSource.getRepository(Flight)
 
-    await AppDataSource.manager.save(flight)
-    console.log("Saved a new flight with id: " + flight.id)
+// INSERT
+
+    // console.log("Inserting a new user into the database...")
+    // await repository.insert({
+    //     F_number: 953058,
+    //     F_name: "Indigo",
+    //     Destination: "Mumbai",
+    //     IsActive: false,
+    // })
+
+// UPDATE
+
+    // console.log("Updating a user into database....");
+    // await repository.update(9, {
+    //     F_name: "Boeing"
+    // })
+
+
+// DELETE 
+
+    // console.log("Deleting a flight details.....")
+    // await repository.delete(8)
 
     console.log("Loading all flights from the database...")
     const flights = await AppDataSource.manager.find(Flight)

@@ -1,8 +1,8 @@
 const mysql = require("mysql2");
 const express = require("express");
-const http = require("http");
-const { message } = require("prompt");
-const { error } = require("console");
+// const http = require("http");
+// const { message } = require("prompt");
+// const { error } = require("console");
 
 const app = express();
 app.use(express.json());

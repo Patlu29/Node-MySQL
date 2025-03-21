@@ -1,23 +1,11 @@
-import { UserController } from "./controller/UserController"
+import { FilghtController } from "./controller/FlightController"
+import { Router } from "express";
 
-export const Routes = [{
-    method: "get",
-    route: "/users",
-    controller: UserController,
-    action: "all"
-}, {
-    method: "get",
-    route: "/users/:id",
-    controller: UserController,
-    action: "one"
-}, {
-    method: "post",
-    route: "/users",
-    controller: UserController,
-    action: "save"
-}, {
-    method: "delete",
-    route: "/users/:id",
-    controller: UserController,
-    action: "remove"
-}]
+export const route = Router()
+const flightController = new FilghtController()
+
+route.post("/newFlight", flightController.NewFlight);
+route.get("/allFlight",flightController.AllFlights);
+route.get("/flight/:id",flightController.Flight)
+route.delete("/flight/:id",flightController.DeleteFlight)
+route.put("/flight/:id", flightController.UpdateFlight)

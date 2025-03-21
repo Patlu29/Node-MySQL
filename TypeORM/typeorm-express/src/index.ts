@@ -1,52 +1,29 @@
-import * as express from "express"
-import * as bodyParser from "body-parser"
-import { Request, Response } from "express"
-import { AppDataSource } from "./data-source"
-import { Routes } from "./routes"
-import { User } from "./entity/User"
+import * as express from "express";
+import * as bodyParser from "body-parser";
+import { Request, Response } from "express";
+import { AppDataSource } from "./data-source";
+import { route } from "./routes";
+import { Flight } from "./entity/Flight";
 
-AppDataSource.initialize().then(async () => {
+// create express app
+const app: express.Application = express();
+app.use(express.json());
 
-    // create express app
-    const app = express()
-    app.use(bodyParser.json())
+app.use("/airPort", route);
 
-    // register express routes from defined application routes
-    Routes.forEach(route => {
-        (app as any)[route.method](route.route, (req: Request, res: Response, next: Function) => {
-            const result = (new (route.controller as any))[route.action](req, res, next)
-            if (result instanceof Promise) {
-                result.then(result => result !== null && result !== undefined ? res.send(result) : undefined)
+app.get("/", (req: any, res: any) => {
+  console.log("checking");
+  return res.status(200).json({ message: " Express Works" });
+});
+const port: number = 2900;
 
-            } else if (result !== null && result !== undefined) {
-                res.json(result)
-            }
-        })
-    })
-
-    // setup express app here
-    // ...
-
-    // start express server
-    app.listen(3000)
-
-    // insert new users for test
-    await AppDataSource.manager.save(
-        AppDataSource.manager.create(User, {
-            firstName: "Timber",
-            lastName: "Saw",
-            age: 27
-        })
-    )
-
-    await AppDataSource.manager.save(
-        AppDataSource.manager.create(User, {
-            firstName: "Phantom",
-            lastName: "Assassin",
-            age: 24
-        })
-    )
-
-    console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results")
-
-}).catch(error => console.log(error))
+AppDataSource.initialize()
+  .then(() => {
+    console.log("connected to mysql");
+    app.listen(port, () => {
+      console.log(`TypeScript with Express running on --> http://localhost:${port}/`);
+    });
+  })
+  .catch((error) => {
+    console.log("database error", error.message);
+  });

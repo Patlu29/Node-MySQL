@@ -6,7 +6,7 @@ export class Flight {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column({unique:true})
+    @Column({unique:true, type: 'bigint'})
     F_number: number
 
     @Column()

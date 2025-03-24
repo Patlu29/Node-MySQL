@@ -5,8 +5,8 @@ import { request } from "http";
 
 const FlightRepository = AppDataSource.getRepository(Flight);
 
-export class FilghtController {
-  async AllFlights(request: Request, response: Response, next: NextFunction) {
+export class FlightController {
+  async AllFlights(request: Request<any>, response: Response<any>, next: NextFunction) {
     // return FlightRepository.find()
     try {
       const flights = await FlightRepository.find();
@@ -21,7 +21,7 @@ export class FilghtController {
     }
   }
 
-  async Flight(request: Request, response: Response, next: NextFunction) {
+  async Flight(request: Request<any>, response: Response<any>, next: NextFunction) {
     try {
       const id = parseInt(request.params.id);
 
@@ -47,7 +47,7 @@ export class FilghtController {
     }
   }
 
-  async NewFlight(request: Request, response: Response, next: NextFunction) {
+  async NewFlight(request: Request<any>, response: Response<any>, next: NextFunction) {
     try {
       const { F_number, F_name, Destination, IsActive } = request.body;
 
@@ -77,7 +77,7 @@ export class FilghtController {
     }
   }
 
-  async DeleteFlight(request: Request, response: Response, next: NextFunction) {
+  async DeleteFlight(request: Request<any>, response: Response<any>, next: NextFunction) {
     try {
       const id = parseInt(request.params.id);
 
@@ -102,7 +102,7 @@ export class FilghtController {
     }
   }
 
-  async UpdateFlight(request: Request, response: Response, next: NextFunction) {
+  async UpdateFlight(request: Request<any>, response: Response<any>, next: NextFunction) {
     try {
       const id = parseInt(request.params.id);
 

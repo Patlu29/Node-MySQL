@@ -6,7 +6,11 @@ import { request } from "http";
 const FlightRepository = AppDataSource.getRepository(Flight);
 
 export class FlightController {
-  async AllFlights(request: Request<any>, response: Response<any>, next: NextFunction) {
+  async AllFlights(
+    request: Request<any>,
+    response: Response<any>,
+    next: NextFunction
+  ) {
     // return FlightRepository.find()
     try {
       const flights = await FlightRepository.find();
@@ -21,7 +25,11 @@ export class FlightController {
     }
   }
 
-  async Flight(request: Request<any>, response: Response<any>, next: NextFunction) {
+  async Flight(
+    request: Request<any>,
+    response: Response<any>,
+    next: NextFunction
+  ) {
     try {
       const id = parseInt(request.params.id);
 
@@ -47,7 +55,11 @@ export class FlightController {
     }
   }
 
-  async NewFlight(request: Request<any>, response: Response<any>, next: NextFunction) {
+  async NewFlight(
+    request: Request<any>,
+    response: Response<any>,
+    next: NextFunction
+  ) {
     try {
       const { F_number, F_name, Destination, IsActive } = request.body;
 
@@ -77,7 +89,11 @@ export class FlightController {
     }
   }
 
-  async DeleteFlight(request: Request<any>, response: Response<any>, next: NextFunction) {
+  async DeleteFlight(
+    request: Request<any>,
+    response: Response<any>,
+    next: NextFunction
+  ) {
     try {
       const id = parseInt(request.params.id);
 
@@ -102,7 +118,11 @@ export class FlightController {
     }
   }
 
-  async UpdateFlight(request: Request<any>, response: Response<any>, next: NextFunction) {
+  async UpdateFlight(
+    request: Request<any>,
+    response: Response<any>,
+    next: NextFunction
+  ) {
     try {
       const id = parseInt(request.params.id);
 
@@ -125,7 +145,9 @@ export class FlightController {
         return response.status(404).json({ message: "Flight not found" });
       }
 
-      return response.status(200).json({ message: "Flight Updated", data: updatedFlight });
+      return response
+        .status(200)
+        .json({ message: "Flight Updated", data: updatedFlight });
     } catch (error) {
       return response.status(500).json({ message: error.message });
     }

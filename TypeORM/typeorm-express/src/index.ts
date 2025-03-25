@@ -21,7 +21,9 @@ AppDataSource.initialize()
   .then(() => {
     console.log("connected to mysql");
     app.listen(port, () => {
-      console.log(`TypeScript with Express running on --> http://localhost:${port}/`);
+      console.log(
+        `TypeScript with Express running on --> http://localhost:${port}/`
+      );
     });
   })
   .catch((error) => {

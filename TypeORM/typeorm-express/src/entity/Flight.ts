@@ -1,25 +1,27 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn} from "typeorm"
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+} from "typeorm";
 
 @Entity()
 export class Flight {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id: number
+  @Column({ unique: true, type: "bigint" })
+  F_number: number;
 
-    @Column({unique:true, type: 'bigint'})
-    F_number: number
+  @Column()
+  F_name: string;
 
-    @Column()
-    F_name: string
+  @Column()
+  Destination: string;
 
-    @Column()
-    Destination: string
+  @Column({ default: true })
+  IsActive: boolean;
 
-    @Column({default: true})
-    IsActive: boolean
-
-    @CreateDateColumn()
-    createdAt: Date
-
-
+  @CreateDateColumn()
+  createdAt: Date;
 }

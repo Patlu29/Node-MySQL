@@ -2,7 +2,6 @@ import { Seeder, SeederFactoryManager } from "typeorm-extension";
 import { DataSource } from "typeorm";
 import { Flight } from "../entity/Flight";
 
-
 export default class FlightSeeder implements Seeder {
   track: false;
 
@@ -24,8 +23,5 @@ export default class FlightSeeder implements Seeder {
 
     await userFactory.saveMany(10);
     console.log(userFactory);
-    
   }
 }
-
-

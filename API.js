@@ -26,21 +26,21 @@ Connection.getConnection((e) => {
     return;
   }
   console.log("Connected with databasae");
-    // var newTable = `
-    // CREATE TABLE IF NOT EXISTS Student_attendance
-    // (Id INT AUTO_INCREMENT PRIMARY KEY,
-    // Register_number INT UNIQUE NOT NULL,
-    // Name VARCHAR(100) NOT NULL,
-    // Class VARCHAR(100) NOT NULL,
-    // Attendance_percentage FLOAT(6) NOT NULL);
-    //   `;
-    // Connection.query(newTable, (e) => {
-    //   if (e) {
-    //     console.error("Error while creating table: ", e);
-    //     return;
-    //   }
-    //   console.log("Table created");
-    // });
+  // var newTable = `
+  // CREATE TABLE IF NOT EXISTS Student_attendance
+  // (Id INT AUTO_INCREMENT PRIMARY KEY,
+  // Register_number INT UNIQUE NOT NULL,
+  // Name VARCHAR(100) NOT NULL,
+  // Class VARCHAR(100) NOT NULL,
+  // Attendance_percentage FLOAT(6) NOT NULL);
+  //   `;
+  // Connection.query(newTable, (e) => {
+  //   if (e) {
+  //     console.error("Error while creating table: ", e);
+  //     return;
+  //   }
+  //   console.log("Table created");
+  // });
 });
 
 app.get("/students", async (req, res) => {
@@ -90,33 +90,35 @@ app.post("/students", async (req, res) => {
 
 app.put("/students/:Id", async (req, res) => {
   try {
-    const { id } = req.params
-    const { Register_number,Name, Class, Attendance_percentage } = req.body
+    const { id } = req.params;
+    const { Register_number, Name, Class, Attendance_percentage } = req.body;
     const update = await Connection.promise().query(
-      `UPDATE Student_attendance set Register_number = ?, Name = ?, Class = ?, Attendance_percentage = ?`, [Register_number, Name, Class, Attendance_percentage]
-    )
+      `UPDATE Student_attendance set Register_number = ?, Name = ?, Class = ?, Attendance_percentage = ?`,
+      [Register_number, Name, Class, Attendance_percentage]
+    );
     res.status(200).json({
-      message: "student data updated"
-    })
-  }catch(e) {
+      message: "student data updated",
+    });
+  } catch (e) {
     res.status(500).json({
-      message: e
-    })
+      message: e,
+    });
   }
-})
+});
 
 app.delete("/students/:Id", async (req, res) => {
   try {
-    const { Id } = req.params
+    const { Id } = req.params;
     const update = await Connection.promise().query(
-      `DELETE FROM Student_attendance WHERE  Id = ?`, [Id]
-    )
+      `DELETE FROM Student_attendance WHERE  Id = ?`,
+      [Id]
+    );
     res.status(200).json({
-      message: "Student data deleted"
-    })
-  }catch(e) {
+      message: "Student data deleted",
+    });
+  } catch (e) {
     res.status(500).json({
-      message: e
-    })
+      message: e,
+    });
   }
-})
+});

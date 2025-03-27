@@ -16,8 +16,8 @@ export const authorizeMiddleware = async (
     }
 
     const decodedToken = jwt.verify(
-      token as any,
-      process.env.SECRET_KEY as any
+      token as string,
+      process.env.SECRET_KEY as string
     );
     res.status(200).json({ message: "Welcome home..", data: decodedToken });
   } catch (e) {

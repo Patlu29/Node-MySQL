@@ -26,7 +26,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
 };
 
 export const login = async (req: Request, res: Response): Promise<void> => {
-  const { userName, email, password } = req.body;
+  const { userName, password } = req.body;
   const user = (req as any).user;
 
   const isPasswordMatch = await bcrypt.compare(password, user.password);

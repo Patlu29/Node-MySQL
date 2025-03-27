@@ -23,7 +23,8 @@
     "nodemailer": "^6.10.0",
     "nodemon": "^3.1.9",
     "reflect-metadata": "^0.2.2",
-    "typeorm": "^0.3.21"
+    "typeorm": "^0.3.21",
+    "typeorm-extension": "^3.7.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",

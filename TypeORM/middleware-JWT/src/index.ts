@@ -3,13 +3,14 @@ import express from "express";
 import bodyParser from "body-parser";
 import { AppDataSource } from "./data-source";
 import authRoutes from "./routes/authRoutes";
+import { InsertBook } from "./bacground-jobs/cornJobs";
 // import { bgJob } from "./bacground-jobs/cornJobs";
 // import  errorHandler  from "errorhandler";
-
 
 const app = express();
 app.use(bodyParser.json());
 // app.use(errorHandler())
+InsertBook();
 AppDataSource.initialize().then(() => {
   console.log("Connected to database");
 

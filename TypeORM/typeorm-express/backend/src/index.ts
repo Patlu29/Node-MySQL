@@ -15,7 +15,7 @@ app.get("/", (req: any, res: any) => {
   console.log("checking");
   return res.status(200).json({ message: " Express Works" });
 });
-const port: number = 2900;
+const port: number = 3900;
 
 AppDataSource.initialize()
   .then(() => {

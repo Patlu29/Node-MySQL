@@ -4,10 +4,12 @@ import { Request, Response } from "express";
 import { AppDataSource } from "./data-source";
 import { route } from "./routes";
 import { Flight } from "./entity/Flight";
+import cors = require("cors");
 
 // create express app
 const app: express.Application = express();
 app.use(express.json());
+app.use(cors());
 
 app.use("/airPort", route);
 
@@ -15,7 +17,7 @@ app.get("/", (req: any, res: any) => {
   console.log("checking");
   return res.status(200).json({ message: " Express Works" });
 });
-const port: number = 2900;
+const port: number = 3900;
 
 AppDataSource.initialize()
   .then(() => {

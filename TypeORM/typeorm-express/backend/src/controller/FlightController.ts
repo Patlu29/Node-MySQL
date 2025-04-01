@@ -16,7 +16,6 @@ export class FlightController {
       const flights = await FlightRepository.find();
 
       return response.status(200).json({
-        message: "Flights fetched successfully",
         data: flights,
       });
     } catch (error) {
@@ -46,7 +45,6 @@ export class FlightController {
       }
 
       return response.status(200).json({
-        message: "Flight fetched successfully",
         data: flight,
       });
     } catch (error) {
@@ -80,7 +78,6 @@ export class FlightController {
       const savedFlight = await FlightRepository.save(flight);
 
       return response.status(201).json({
-        message: "Flight created successfully",
         data: savedFlight,
       });
     } catch (error) {
@@ -133,21 +130,21 @@ export class FlightController {
       const flightUpdate = await FlightRepository.findOneBy({ id: id });
 
       const { F_number, F_name, Destination, IsActive } = request.body;
+      const newFlightData = {
+        ...flightUpdate,
+        F_number: F_number || flightUpdate.F_number,
+        F_name: F_name || flightUpdate.F_name,
+        Destination: Destination || flightUpdate.Destination,
+        IsActive: IsActive || flightUpdate.IsActive,
+      };
 
-      flightUpdate.F_number = F_number;
-      flightUpdate.F_name = F_name;
-      flightUpdate.Destination = Destination;
-      flightUpdate.IsActive = IsActive;
-
-      const updatedFlight = await FlightRepository.save(flightUpdate);
+      const updatedFlight = await FlightRepository.save(newFlightData);
 
       if (!flightUpdate) {
         return response.status(404).json({ message: "Flight not found" });
       }
 
-      return response
-        .status(200)
-        .json({ message: "Flight Updated", data: updatedFlight });
+      return response.status(200).json({ data: updatedFlight });
     } catch (error) {
       return response.status(500).json({ message: error.message });
     }

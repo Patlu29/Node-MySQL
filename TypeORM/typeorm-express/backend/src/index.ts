@@ -4,10 +4,12 @@ import { Request, Response } from "express";
 import { AppDataSource } from "./data-source";
 import { route } from "./routes";
 import { Flight } from "./entity/Flight";
+import cors = require("cors");
 
 // create express app
 const app: express.Application = express();
 app.use(express.json());
+app.use(cors());
 
 app.use("/airPort", route);
 

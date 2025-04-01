@@ -10,7 +10,7 @@ import { InsertBook } from "./bacground-jobs/cornJobs";
 const app = express();
 app.use(bodyParser.json());
 // app.use(errorHandler())
-InsertBook();
+// InsertBook();
 AppDataSource.initialize().then(() => {
   console.log("Connected to database");
 

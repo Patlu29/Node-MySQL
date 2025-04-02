@@ -61,7 +61,6 @@ export class FlightController {
     try {
       const { F_number, F_name, Destination, IsActive } = request.body;
 
-      // You can add more validation here if required
       if (!F_number || !F_name || !Destination) {
         return response
           .status(400)

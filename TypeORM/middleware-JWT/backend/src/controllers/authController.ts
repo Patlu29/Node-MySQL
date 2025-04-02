@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { AppDataSource } from "../data-source";
@@ -10,7 +10,7 @@ dotenv.config();
 const userRepository = AppDataSource.getRepository(User);
 
 export const register = async (req: Request, res: Response): Promise<void> => {
-  const { userName, email, password } = req.body;
+  const { userName, email, password, role } = req.body;
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -18,6 +18,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
     userName,
     email,
     password: hashedPassword,
+    role: "user",
   });
 
   await userRepository.save(user);
@@ -26,26 +27,39 @@ export const register = async (req: Request, res: Response): Promise<void> => {
 };
 
 export const login = async (req: Request, res: Response): Promise<void> => {
-  const { userName, password } = req.body;
-  const user = (req as any).user;
+  const { email, password } = req.body;
 
-  const isPasswordMatch = await bcrypt.compare(password, user.password);
-  const isUsernameMatch = await userRepository.findOneBy({ userName });
+  const user = await userRepository.findOneBy({ email });
 
-  if (!isUsernameMatch) {
+  if (!user) {
     res.status(401).json({ message: "Invalid user" });
     return;
   }
+
+  const isPasswordMatch = await bcrypt.compare(password, user.password);
+
   if (!isPasswordMatch) {
     res.status(401).json({ message: "Invalid password" });
     return;
   }
 
-  const token = jwt.sign({ email: user.email }, process.env.SECRET_KEY as any, {
-    expiresIn: "1h",
-  });
+  const token = jwt.sign(
+    { email: user.email, role: user.role },
+    process.env.SECRET_KEY as string,
+    { expiresIn: "1h" }
+  );
 
-  res.json({ message: "Login successful", token });
+  res.json({ message: "Login successful", token, role: user.role });
+};
+
+export const AllUsers = async (_req: Request, res: Response) => {
+  try {
+    const users = await userRepository.find();
+    // console.log('user datas', users)
+    res.status(200).send({ data: users });
+  } catch (error: any) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 };
 
 export const home = async (req: Request, res: Response): Promise<void> => {

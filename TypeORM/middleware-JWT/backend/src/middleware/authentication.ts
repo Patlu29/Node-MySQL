@@ -7,7 +7,7 @@ export const registerMiddleware = async (
   res: Response,
   next: NextFunction
 ): Promise<void> => {
-  const { email, password } = req.body;
+  const { userName, email, password } = req.body;
 
   if (!email || !password) {
     res.status(400).json({ message: "Email and password are required" });

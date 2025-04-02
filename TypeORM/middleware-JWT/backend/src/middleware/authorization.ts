@@ -19,14 +19,14 @@ export const authorizeAdminMiddleware = async (
       token as string,
       process.env.SECRET_KEY as string
     );
-  (req as any).user = decodedToken
+    (req as any).user = decodedToken;
 
-  const user = (req as any).user
+    const user = (req as any).user;
 
     // console.log('decoded token',user)
-    if(user.role === "admin"){
-    // res.status(200).json({ message: "Welcome home..", data: decodedToken });
-    next()
+    if (user.role === "admin") {
+      // res.status(200).json({ message: "Welcome home..", data: decodedToken });
+      next();
     }
   } catch (e) {
     res.status(500).json({ message: e });
@@ -49,8 +49,7 @@ export const authorizeMiddleware = async (
       process.env.SECRET_KEY as string
     );
     res.status(200).json({ message: "Welcome home..", data: decodedToken });
-    next()
-
+    next();
   } catch (e) {
     res.status(500).json({ message: e });
   }

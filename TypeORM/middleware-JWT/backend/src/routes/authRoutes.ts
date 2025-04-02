@@ -5,7 +5,6 @@ import {
   loginMiddleware,
 } from "../middleware/authentication";
 import { authorizeAdminMiddleware, authorizeMiddleware } from "../middleware/authorization";
-import { isAdmin } from "../middleware/roleAuthentication";
 
 const router = express.Router();
 

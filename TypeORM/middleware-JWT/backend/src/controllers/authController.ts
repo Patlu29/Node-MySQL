@@ -12,12 +12,6 @@ const userRepository = AppDataSource.getRepository(User);
 export const register = async (req: Request, res: Response): Promise<void> => {
   const { userName, email, password, role } = req.body;
 
-  // const validRoles = ["admin", "user"];
-  // if (!validRoles.includes(role)) {
-  //   res.status(400).json({ message: "Invalid role. Choose 'admin' or 'user'." });
-  //   return;
-  // }
-
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const user = userRepository.create({

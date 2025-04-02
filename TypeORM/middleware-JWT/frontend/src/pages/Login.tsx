@@ -28,13 +28,12 @@ const Login = () => {
         { email, password },
         { headers: { "Content-Type": "application/json" } }
       );
-      
+
       const token = loginResponse.data;
       console.log(token);
 
       localStorage.setItem("token", token.token);
-    
-      
+
       navigate("/home");
     } catch (err: any) {
       setError(err.message || "An error occurred during login.");

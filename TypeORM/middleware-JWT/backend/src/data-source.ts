@@ -1,4 +1,4 @@
-import 'reflect-metadata'
+import "reflect-metadata";
 import { DataSource } from "typeorm";
 import * as dotenv from "dotenv";
 
@@ -14,8 +14,8 @@ export const AppDataSource = new DataSource({
   synchronize: true,
   logging: true,
   entities: [`${process.cwd()}/src/entity/*.ts`],
-    // @ts-ignore
-    seeds: [`${process.cwd()}/src/seeders/*.ts`],
-    // @ts-ignore
-    factories: [`${process.cwd()}/src/factory/*.ts`],
+  // @ts-ignore
+  seeds: [`${process.cwd()}/src/seeders/*.ts`],
+  // @ts-ignore
+  factories: [`${process.cwd()}/src/factory/*.ts`],
 });

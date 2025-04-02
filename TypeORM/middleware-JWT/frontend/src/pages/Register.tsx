@@ -34,7 +34,7 @@ const Register = () => {
       setError("");
       setTimeout(() => {
         navigate("/login");
-        alert("successfully registered")
+        alert("successfully registered");
       }, 1000);
     } catch (err: any) {
       setError(err.response?.data?.error || "An error occurred.");

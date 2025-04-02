@@ -21,15 +21,16 @@ const Home = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem('token')
-      
+      const token = localStorage.getItem("token");
+
       const adminResponce = await axios.get(
-        "http://localhost:3900/auth/users",{
-          headers:{Authorization :`Bearer ${token}`}
+        "http://localhost:3900/auth/users",
+        {
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
       console.log(adminResponce.data);
-      setTab(false)
+      setTab(false);
       const UsersData: Users[] = adminResponce.data.data.map((user: Users) => ({
         id: user.id,
         userName: user.userName,
@@ -52,7 +53,7 @@ const Home = () => {
       <div>
         {tab ? (
           ""
-                ) : (
+        ) : (
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
               <tr>

@@ -1,10 +1,5 @@
-
 const DashBoard = () => {
-    return (
-        <div>
-            Welcome user
-        </div>
-    )
-}
+  return <div>Welcome user</div>;
+};
 
-export default DashBoard
+export default DashBoard;

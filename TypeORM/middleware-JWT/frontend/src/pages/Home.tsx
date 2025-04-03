@@ -46,7 +46,7 @@ const Home = () => {
 
   return (
     <div>
-      <p>Wakeup daddy's home</p>
+      <p>Welcome home</p>
       <form action="submit" onSubmit={handleSubmit}>
         <button type="submit">Users</button>
       </form>

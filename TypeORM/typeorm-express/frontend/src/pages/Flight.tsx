@@ -29,7 +29,7 @@ const FlightComponent = () => {
     AllFlights();
   }, []);
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setActive(e.target.value === "1");
   };
 
@@ -38,24 +38,23 @@ const FlightComponent = () => {
       const response = await axios.get(
         "http://localhost:3900/airPort/allflight"
       );
-      const filteredData: Flight[] = response.data.data.map((post: any) => ({
+      const filteredData: Flight[] = response.data.data.map((post: Flight) => ({
         id: post.id,
-        flightNumber: post.F_number,
-        flightName: post.F_name,
-        destination: post.Destination,
-        active: !!post.IsActive,
+        flightNumber: post.flightNumber,
+        flightName: post.flightName,
+        destination: post.destination,
+        active: !!post.active,
         createdAt: post.createdAt,
       }));
       setData(filteredData);
       setLoading(false);
-    } catch (err: any) {
-      setError(err.message || "Failed to fetch data");
+    } catch (err) {
+      setError(err instanceof Error ? err.message :"Failed to fetch data");
       setLoading(false);
     }
   };
 
-  const addFlight = async (e: any) => {
-    e.preventDefault();
+  const addFlight = async () => {
 
     const existingFlight = data.find(
       (flight) => flight.flightNumber === flightNumber
@@ -76,13 +75,12 @@ const FlightComponent = () => {
       setFlightNumber("");
       setFlightName("");
       setDestination("");
-    } catch (err: any) {
-      setError(err.message || "Failed to post data");
+    } catch (err) {
+      setError(err instanceof Error ? err.message :"Failed to add data");
     }
   };
 
-  const updateFlight = async (e: any) => {
-    e.preventDefault();
+  const updateFlight = async () => {
     try {
       await axios.put(`http://localhost:3900/airPort/flight/${id}`, {
         F_number: flightNumbers,
@@ -95,8 +93,8 @@ const FlightComponent = () => {
       setFlightNumbers("");
       setFlightNames("");
       setDestinations("");
-    } catch (err: any) {
-      setError(err.message || "Failed to update data");
+    } catch (err) {
+      setError(err instanceof Error ? err.message :"Failed to update data");
     }
   };
 
@@ -104,8 +102,8 @@ const FlightComponent = () => {
     try {
       await axios.delete(`http://localhost:3900/airPort/flight/${id}`);
       AllFlights();
-    } catch (err: any) {
-      setError(err.message || "Failed to Delete data");
+    } catch (err) {
+      setError(err instanceof Error ? err.message :"Failed to delete data");
     }
   }
 

@@ -10,8 +10,7 @@ const Register = () => {
   const [success, setSuccess] = useState("");
   const navigate = useNavigate(); // Initialize useNavigate
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
 
     if (!userName || !email || !password) {
       setError("All fields are required.");
@@ -36,8 +35,8 @@ const Register = () => {
         navigate("/login");
         alert("successfully registered");
       }, 1000);
-    } catch (err: any) {
-      setError(err.response?.data?.error || "An error occurred.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message :"An error occurred.");
       setSuccess("");
     }
   };

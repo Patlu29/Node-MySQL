@@ -2,6 +2,10 @@ import { Request, Response, NextFunction } from "express";
 import { AppDataSource } from "../data-source";
 import { User } from "../entity/User";
 
+interface CustomRequest extends Request {
+  user?: User;
+}
+
 export const registerMiddleware = async (
   req: Request,
   res: Response,
@@ -45,7 +49,7 @@ export const loginMiddleware = async (
     return;
   }
 
-  (req as any).user = user;
+  (req as CustomRequest).user = user;
 
   next();
 };

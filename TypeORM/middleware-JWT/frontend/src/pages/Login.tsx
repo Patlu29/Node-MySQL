@@ -8,8 +8,7 @@ const Login = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
 
     if (!email || !password) {
       setError("Please fill in both email and password.");
@@ -35,8 +34,8 @@ const Login = () => {
       localStorage.setItem("token", token.token);
 
       navigate("/home");
-    } catch (err: any) {
-      setError(err.message || "An error occurred during login.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An error occurred during login.");
     }
   };
 

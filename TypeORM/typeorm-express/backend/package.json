@@ -5,6 +5,7 @@
    "type": "commonjs",
    "devDependencies": {
       "@types/cors": "^2.8.17",
+      "@types/express": "^5.0.1",
       "@types/faker": "^6.6.8",
       "@types/node": "^16.11.10",
       "ts-node": "10.9.1",

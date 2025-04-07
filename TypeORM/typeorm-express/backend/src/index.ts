@@ -1,5 +1,4 @@
 import * as express from "express";
-import * as bodyParser from "body-parser";
 import { Request, Response } from "express";
 import { AppDataSource } from "./data-source";
 import { route } from "./routes";
@@ -13,9 +12,10 @@ app.use(cors());
 
 app.use("/airPort", route);
 
-app.get("/", (req: any, res: any) => {
+app.get("/", (req: Request, res: Response):Promise<void> => {
   console.log("checking");
-  return res.status(200).json({ message: " Express Works" });
+  res.status(200).json({ message: " Express Works" });
+  return 
 });
 const port: number = 3900;
 

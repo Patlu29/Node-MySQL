@@ -11,8 +11,9 @@ const insertBook = async () => {
 
     await bookRepository.save(newBook);
     console.log("New book added:", newBook.bookName);
-  } catch (error: any) {
-    console.error("Error inserting book:", error.message);
+  } catch (error) {
+    
+    console.error(error instanceof Error ? error.message :"Failed to insert data");
   }
 };
 

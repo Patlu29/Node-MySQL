@@ -5,8 +5,10 @@ import * as dotenv from "dotenv";
 
 dotenv.config();
 
+type DB = "mysql"
+
 export const AppDataSource = new DataSource({
-  type: process.env.DB_TYPE as any,
+  type: process.env.DB_TYPE as DB,
   host: process.env.DB_HOST,
   port: parseInt(process.env.DB_PORT),
   username: process.env.DB_USERNAME,

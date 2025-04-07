@@ -39,8 +39,8 @@ const Home = () => {
         role: user.role,
       }));
       setData(UsersData);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "");
     }
   };
 

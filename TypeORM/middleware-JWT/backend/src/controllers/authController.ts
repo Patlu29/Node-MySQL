@@ -57,8 +57,8 @@ export const AllUsers = async (_req: Request, res: Response) => {
     const users = await userRepository.find();
     // console.log('user datas', users)
     res.status(200).send({ data: users });
-  } catch (error: any) {
-    res.status(500).json({ error: "Internal Server Error" });
+  } catch (error) {
+    res.json( error instanceof Error ? error.message :"Failed to fetch data" );
   }
 };
 

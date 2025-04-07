@@ -7,8 +7,8 @@ const FlightRepository = AppDataSource.getRepository(Flight);
 
 export class FlightController {
   async AllFlights(
-    request: Request<any>,
-    response: Response<any>,
+    request: Request,
+    response: Response,
     next: NextFunction
   ) {
     // return FlightRepository.find()
@@ -25,8 +25,8 @@ export class FlightController {
   }
 
   async Flight(
-    request: Request<any>,
-    response: Response<any>,
+    request: Request,
+    response: Response,
     next: NextFunction
   ) {
     try {
@@ -54,8 +54,8 @@ export class FlightController {
   }
 
   async NewFlight(
-    request: Request<any>,
-    response: Response<any>,
+    request: Request,
+    response: Response,
     next: NextFunction
   ) {
     try {
@@ -86,8 +86,8 @@ export class FlightController {
   }
 
   async DeleteFlight(
-    request: Request<any>,
-    response: Response<any>,
+    request: Request,
+    response: Response,
     next: NextFunction
   ) {
     try {
@@ -115,8 +115,8 @@ export class FlightController {
   }
 
   async UpdateFlight(
-    request: Request<any>,
-    response: Response<any>,
+    request: Request,
+    response: Response,
     next: NextFunction
   ) {
     try {

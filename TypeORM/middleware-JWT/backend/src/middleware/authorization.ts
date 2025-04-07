@@ -1,8 +1,13 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
+import { JwtPayload } from "jsonwebtoken";
 import * as dotenv from "dotenv";
 
 dotenv.config();
+
+export interface CustomRequest extends Request {
+  user?: string | JwtPayload ;
+}
 
 export const authorizeAdminMiddleware = async (
   req: Request,
@@ -19,7 +24,7 @@ export const authorizeAdminMiddleware = async (
       token as string,
       process.env.SECRET_KEY as string
     );
-    (req as any).user = decodedToken;
+    (req as CustomRequest).user = decodedToken;
 
     const user = (req as any).user;
 
